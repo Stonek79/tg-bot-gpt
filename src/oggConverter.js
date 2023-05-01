@@ -37,6 +37,7 @@ const toMp3 = async (input, output) => {
         .on("end", () => {
           res(outputPath);
           unlink(input);
+          setTimeout(() => unlink(outputPath), 3000);
         })
         .on("error", (err) => rej(error.message))
         .run();
