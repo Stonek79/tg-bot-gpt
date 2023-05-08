@@ -33,8 +33,6 @@ const chat = async (messages) => {
 
     const result = response.data.choices[0].message;
 
-    console.log(result);
-
     return result;
   } catch (error) {
     console.log("Error with create chat: ", error.message);
