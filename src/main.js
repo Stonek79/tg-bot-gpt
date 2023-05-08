@@ -37,11 +37,11 @@ bot.on(message("voice"), async (ctx) => {
     const text = await transcription(mp3Path);
     await ctx.reply(code(`Обрабатываю запрос: ${text}`));
 
-    await ctx.session.messages.push({ role: roles.USER, content: text });
+    ctx.session.messages.push({ role: roles.USER, content: text });
 
     const response = await chat(ctx.session.messages);
 
-    await ctx.session.messages.push({
+    ctx.session.messages.push({
       role: roles.ASSISTANT,
       content: response.content,
     });
@@ -58,14 +58,14 @@ bot.on(message("text"), async (ctx) => {
   try {
     await ctx.reply(code("Принял сообщение! Работаю, ожидайте..."));
 
-    await ctx.session.messages.push({
+    ctx.session.messages.push({
       role: roles.USER,
       content: ctx.message.text,
     });
 
     const response = await chat(ctx.session.messages);
 
-    await ctx.session.messages.push({
+    ctx.session.messages.push({
       role: roles.ASSISTANT,
       content: response.content,
     });
