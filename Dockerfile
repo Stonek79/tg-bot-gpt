@@ -10,6 +10,7 @@ COPY . .
 
 RUN --mount=type=secret,id=SECRET_KEYS \
     x=$(pwd) && \
+    echo "Secret is: $(cat /run/secrets/SECRET_KEYS)" && \
     echo "The current working directory : $x" && \
     cat /run/secrets/SECRET_KEYS > /app/config/production.json
 
