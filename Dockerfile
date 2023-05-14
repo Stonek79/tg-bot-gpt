@@ -11,7 +11,7 @@ COPY . .
 RUN --mount=type=secret,id=SECRET_KEYS \
     x=$(pwd) && \
     echo "The current working directory : $x" && \
-    cat /run/secrets/SECRET_KEYS > /config/production.json
+    cat /run/secrets/SECRET_KEYS > /app/config/production.json
 
 ENV PORT=3000
 
