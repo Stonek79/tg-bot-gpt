@@ -8,8 +8,8 @@ RUN npm ci
 
 COPY . .
 
-RUN --mount=type=secret,id=SECRET_KEYS \
-    cat /run/secrets/SECRET_KEYS > /app/config/production.json
+# RUN --mount=type=secret,id=SECRET_KEYS \
+#     cat /run/secrets/SECRET_KEYS > /app/config/production.json
 
 ENV PORT=3000
 
