@@ -1,13 +1,5 @@
 FROM node:16-alpine
 
-RUN --mount=type=secret,id=SECRET_KEYS \
-    echo "Secret: $(cat /run/secrets/SECRET_KEYS)" && \
-    x=$(pwd) && \
-    # y=$(ls) && \
-    # echo "Directories is: $y" && \
-    echo "The current working directory : $x" && \
-    # cat /run/secrets/SECRET_KEYS > /app/config/production.json
-
 WORKDIR /app
 
 COPY package*.json ./
@@ -15,6 +7,14 @@ COPY package*.json ./
 RUN npm ci
 
 COPY . .
+
+RUN --mount=type=secret,id=SECRET_KEYS \
+    echo "Secret: $(cat /run/secrets/SECRET_KEYS)" && \
+    x=$(pwd) && \
+    y=$(ls) && \
+    echo "Directories is: $y" && \
+    echo "The current working directory : $x" && \
+    cat /run/secrets/SECRET_KEYS > /app/config/production.json
 
 ENV PORT=3000
 
